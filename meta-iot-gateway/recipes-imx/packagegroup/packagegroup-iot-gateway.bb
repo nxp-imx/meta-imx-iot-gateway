@@ -1,7 +1,7 @@
 # Copyright (C) 2016 Freescale Semiconductor
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-DESCRIPTION = "NXP IoT Gateway BSP package group"
+DESCRIPTION = "i.MX IoT Gateway BSP package group"
 LICENSE = "MIT"
 
 inherit packagegroup

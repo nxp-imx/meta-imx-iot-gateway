@@ -1,4 +1,4 @@
-DESCRIPTION = "NXP IoT Gateway Image"
+DESCRIPTION = "i.MX IoT Gateway Image"
 LICENSE = "MIT"
 
 inherit core-image distro_features_check
@@ -20,8 +20,6 @@ IMAGE_INSTALL += " \
     ${CORE_IMAGE_BASE_INSTALL} \
     kernel-dev \
     packagegroup-core-full-cmdline \
-    packagegroup-nxp-iotg \
+    packagegroup-iot-gateway \
     packagegroup-tools-bluetooth \
 "
-
-export IMAGE_BASENAME = "nxp-image-iotg"
