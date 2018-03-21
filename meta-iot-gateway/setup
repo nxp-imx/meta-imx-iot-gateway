@@ -1,0 +1,44 @@
+# IoT Gateway Setup Script
+#
+# See README for instructions on using this script.
+#
+# Copyright (C) 2016 Freescale Semiconductor
+# Copyright 2018 NXP
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+#
+
+if [ ! -e $1/conf/local.conf.sample ]; then
+    if [ "$DISTRO" = "" ]; then
+        DISTRO=imx-iot-gateway
+    fi
+    if [ "$MACHINE" = "" ]; then
+        MACHINE=imx6ulevk
+    fi
+    EULA=$EULA DISTRO=$DISTRO MACHINE=$MACHINE . ./sources/meta-fsl-bsp-release/imx/tools/fsl-setup-release.sh -b $@
+    echo "INHERIT += \"rm_work\"" >> conf/local.conf
+    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-perl\"" >> conf/bblayers.conf
+    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-systemd\"" >> conf/bblayers.conf
+    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-security\"" >> conf/bblayers.conf
+    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-virtualization\"" >> conf/bblayers.conf
+    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-imx-iot-gateway/meta-iot-gateway\"" >> conf/bblayers.conf
+else
+    . ./sources/base/setup-environment $@
+fi
+
+echo ""
+echo "You can now create an IoT Gateway image:"
+echo "    $ bitbake imx-image-iot-gateway"
+echo ""

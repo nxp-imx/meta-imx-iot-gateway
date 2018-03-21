@@ -1,0 +1,109 @@
+IoT Gateway Support for i.MX BSP on Yocto Project
+=================================================
+
+This Yocto support package provides a base layer meta-iot-gateway
+and a supplemental layer meta-greengrass for building IoT Gateway
+Linux images on top of the standard i.MX BSP. The base layer adds basic
+features like WiFi routing, access point and client capabilities, as
+well as various application support packages like python, txthings
+and nodejs. The supplemental layer meta-greengrass adds an AWS
+Greengrass core to the image.
+
+The images are tested specifically on NXP i.MX 6UltraLite EVK and
+i.MX 6UltraLowLite EVK platforms.
+
+Quick Start
+-----------
+To setup the BSP you need to have `repo` installed. Install the `repo` utility:
+
+$ mkdir ~/bin
+$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+$ chmod a+x ~/bin/repo
+$ PATH=${PATH}:~/bin
+
+Create the BSP directory:
+
+$ mkdir imx-iot-gateway
+$ cd imx-iot-gateway
+$ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-morty -m imx-4.9.11-1.0.0-iotg-greengrass-demo.xml
+
+Download the BSP:
+
+$ repo sync
+
+Create the build directory for a base build or for a Greengrass
+build, with <machine> = imx6ulevk (default) or imx6ull14x14evk:
+
+$ cd imx-iot-gateway
+$ [MACHINE=<machine>] . setup-iot-gateway | setup-greengrass <build-dir>
+
+If the build directory exists but you're in a new shell, run the
+setup script again to setup your shell. The build folder will
+be unaffected:
+
+$ cd imx-iot-gateway
+$ [MACHINE=<machine>] . setup-iot-gateway | setup-greengrass <build-dir>
+
+Download the Greengrass core software and security certificates:
+
+If you're working with Greengrass, you'll need to download two files
+from the AWS IoT console:
+- greengrass-linux-armv7l-1.3.0.tar.gz - the AWS Greengrass core software,
+  version 1.3.0
+- GUID-setup.tar.gz - security certificates enabling secure communications
+  with the AWS IoT cloud and config.json which contains configuration
+  information specific to your AWS Greengrass core and the AWS IoT endpoint
+
+Copy the core software to your build environment sources folder. The setup-greengrass
+script sets GG_TARBALL_LOCAL_PATH to this location in your local.conf:
+
+$ cp ~/greengrass-linux-armv7l-1.3.0.tar.gz imx-iot-gateway/sources
+
+Build the image:
+
+$ cd imx-iot-gateway
+$ bitbake imx-image-iot-gateway
+
+Greengrass Tutorial
+-------------------
+If you're working with Greengrass, you should now have everything you
+need to run the tutorial [1]. You can skip Module 1 since the image
+is already configured to run the Greengrass core.
+
+Note that if you are unable to deploy the Greengrass configuration [2], 
+you may need to adjust your local network.
+
+[1] https://docs.aws.amazon.com/greengrass/latest/developerguide/gg-gs.html
+[2] https://docs.aws.amazon.com/greengrass/latest/developerguide/configs-core.html
+
+In Module 2, you do not need to copy the core software, it is already installed
+in the image. You will need to follow the instructions for copying the
+security certificates in GUID-setup.tar.gz that you downloaded earlier.
+
+Ethernet
+--------
+For the 4.9.11-1.0.0 release, a bug was introduced that prevents
+the system from automatically establishing a network connection
+over Ethernet. This can be corrected by executing the following
+commands on the console:
+
+root@imx6ulevk:~# systemctl unmask connman
+root@imx6ulevk:~# systemctl enable connman
+root@imx6ulevk:~# systemctl start connman
+
+WiFi
+----
+Some instructions for enabling WiFi:
+
+In the boot console, update the dtb, with <dtb-proc> = imx6ul or imx6ull:
+
+$ setenv fdt_file <dtb-proc>-14x14-evk-btwifi.dtb
+$ saveenv
+$ boot
+
+In the shell console, configure the board as a WiFi client:
+
+$ ifconfig wlan0 up
+$ wpa_passphrase <wifi-network> <wifi-password> >> /etc/wpa_supplicant.conf
+$ wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf -D nl80211
+$ udhcpc -i wlan0
