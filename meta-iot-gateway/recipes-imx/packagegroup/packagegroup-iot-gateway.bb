@@ -32,7 +32,7 @@ RDEPENDS_${PN} = " \
     polkit-group-rule-network \
     polkit-group-rule-datetime \
     rpm \
-    rsyslog \
+    sysklogd \
     tcpdump \
     vim \
     xuser-account \
