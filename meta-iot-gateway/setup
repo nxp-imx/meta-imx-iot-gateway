@@ -30,7 +30,6 @@ if [ ! -e $1/conf/local.conf.sample ]; then
     EULA=$EULA DISTRO=$DISTRO MACHINE=$MACHINE . ./sources/meta-fsl-bsp-release/imx/tools/fsl-setup-release.sh -b $@
     echo "INHERIT += \"rm_work\"" >> conf/local.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-perl\"" >> conf/bblayers.conf
-    echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-systemd\"" >> conf/bblayers.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-security\"" >> conf/bblayers.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-virtualization\"" >> conf/bblayers.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-imx-iot-gateway/meta-iot-gateway\"" >> conf/bblayers.conf
