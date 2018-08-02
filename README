@@ -61,7 +61,7 @@ $ cp ~/greengrass-linux-armv7l-1.3.0.tar.gz imx-iot-gateway/sources
 
 Build the image:
 
-$ cd imx-iot-gateway
+$ cd imx-iot-gateway/<build-dir>
 $ bitbake imx-image-iot-gateway
 
 Greengrass Tutorial
