@@ -25,7 +25,7 @@ Create the BSP directory:
 
 $ mkdir imx-iot-gateway
 $ cd imx-iot-gateway
-$ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-rocko -m imx-4.9.88-2.0.0-iotg-greengrass-demo.xml
+$ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-sumo -m imx-4.14.62-1.0.0_beta_iotg-greengrass.xml
 
 Download the BSP:
 
