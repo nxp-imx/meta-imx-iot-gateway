@@ -8,7 +8,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     bridge-utils \
-    hostap-daemon \
+    hostapd \
     connman \
     connman-client \
     smcroute \

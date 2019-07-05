@@ -1,20 +1,11 @@
-From 07d589ffc559f621f4dc53da3e1f6940ea3ce48e Mon Sep 17 00:00:00 2001
-From: Tom Hochstein <tom.hochstein@freescale.com>
-Date: Thu, 8 Oct 2015 11:40:45 -0500
-Subject: [PATCH] defconfig: Add serial console and wifi support
-
----
- arch/arm/configs/imx_v7_defconfig | 70 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 70 insertions(+)
-
-diff --git a/arch/arm/configs/imx_v7_defconfig b/arch/arm/configs/imx_v7_defconfig
-index 17b5a40..a6866ba 100644
---- a/arch/arm/configs/imx_v7_defconfig
-+++ b/arch/arm/configs/imx_v7_defconfig
-@@ -448,3 +448,343 @@ CONFIG_LIBCRC32C=m
- CONFIG_FONTS=y
- CONFIG_FONT_8x8=y
- CONFIG_FONT_8x16=y
+Index: kernel-source/arch/arm/configs/imx_v7_defconfig
+===================================================================
+--- kernel-source.orig/arch/arm/configs/imx_v7_defconfig
++++ kernel-source/arch/arm/configs/imx_v7_defconfig
+@@ -460,3 +460,346 @@ CONFIG_MAGIC_SYSRQ=y
+ # CONFIG_SCHED_DEBUG is not set
+ # CONFIG_DEBUG_BUGVERBOSE is not set
+ # CONFIG_FTRACE is not set
 +CONFIG_DEVPTS_MULTIPLE_INSTANCES=y
 +CONFIG_FHANDLE=y
 +CONFIG_LIBERTAS_THINFIRM=m
@@ -219,7 +210,7 @@ index 17b5a40..a6866ba 100644
 +CONFIG_NETFILTER_XT_TARGET_NOTRACK=y
 +CONFIG_NETFILTER_XT_TARGET_RATEEST=y
 +# CONFIG_NETFILTER_XT_TARGET_REDIRECT is not set
-+CONFIG_NETFILTER_XT_TARGET_TEE=y
++# CONFIG_NETFILTER_XT_TARGET_TEE is not set
 +# CONFIG_NETFILTER_XT_TARGET_TRACE is not set
 +CONFIG_NETFILTER_XT_TARGET_TCPMSS=y
 +# CONFIG_NETFILTER_XT_TARGET_TCPOPTSTRIP is not set
@@ -358,6 +349,3 @@ index 17b5a40..a6866ba 100644
 +# CONFIG_PHONET is not set
 +# CONFIG_IEEE802154 is not set
 +CONFIG_NET_SCHED=y
--- 
-2.1.4
-
