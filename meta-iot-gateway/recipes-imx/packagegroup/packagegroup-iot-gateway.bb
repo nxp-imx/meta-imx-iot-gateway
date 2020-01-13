@@ -18,7 +18,7 @@ RDEPENDS_${PN} = " \
     libftdi \
     libnss-mdns \
     libudev \
-    gst-rtsp \
+    gstreamer1.0-rtsp-server \
     python-core \
     python-pip \
     python-pytun \
