@@ -27,7 +27,7 @@ if [ ! -e $1/conf/local.conf.sample ]; then
     if [ "$MACHINE" = "" ]; then
         MACHINE=imx6ulevk
     fi
-    EULA=$EULA DISTRO=$DISTRO MACHINE=$MACHINE . ./sources/meta-fsl-bsp-release/imx/tools/fsl-setup-release.sh -b $@
+    EULA=$EULA DISTRO=$DISTRO MACHINE=$MACHINE . ./sources/meta-imx/tools/imx-setup-release.sh -b $@
     echo "INHERIT += \"rm_work\"" >> conf/local.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-openembedded/meta-perl\"" >> conf/bblayers.conf
     echo "BBLAYERS += \"\${BSPDIR}/sources/meta-security\"" >> conf/bblayers.conf
