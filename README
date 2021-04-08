@@ -22,14 +22,10 @@ Create the BSP directory:
 
 $ mkdir imx-iot-gateway
 $ cd imx-iot-gateway
-$ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-zeus -m <iotg_manifest>
+$ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-gatesgarth -m <iotg_manifest>
 
-Here are iotg manifests for zeus releases:
-imx-5.4.24-2.1.0_demo_iotg.xml
-imx-5.4.3-1.0.0_demo_iotg.xml
-imx-5.4.3-2.0.0_demo_iotg.xml
-imx-5.4.47-2.2.0_demo_iotg.xml
-imx-5.4.70-2.3.0_demo_iotg.xml
+Here are iotg manifests for gatesgarth releases:
+imx-5.10.9-1.0.0_demo_iotg.xml
 
 Download the BSP:
 
